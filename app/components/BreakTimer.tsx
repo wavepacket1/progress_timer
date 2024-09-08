@@ -1,6 +1,6 @@
 import { on } from 'events';
 import React,{ useState,useEffect } from 'react';
-import AudioSingleton from './AudioSingleton';
+import AudioManager from './AudioSingleton';
 
 
 interface BreakTimerProps {
@@ -15,7 +15,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const [break_time,setTime] = useState(initialBreakTime);
     const [isRunning,setIsRunning] = useState(false);
     const [isPlaying,setIsPlaying] = useState(false);
-    const audio = AudioSingleton.getInstance();
+    const audio = AudioManager.getInstance();
 
     useEffect(() => {
         // 初期化時に break_timer_running の値に応じて isRunning を設定
