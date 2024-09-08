@@ -1,5 +1,6 @@
 import { on } from 'events';
 import React,{ useState,useEffect } from 'react';
+import AudioSingleton from './AudioSingleton';
 
 
 interface BreakTimerProps {
@@ -13,6 +14,8 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const [initialBreakTime,setInitialBreakTime] = useState<number>(0);
     const [break_time,setTime] = useState(initialBreakTime);
     const [isRunning,setIsRunning] = useState(false);
+    const [isPlaying,setIsPlaying] = useState(false);
+    const audio = AudioSingleton.getInstance();
 
     useEffect(() => {
         // 初期化時に break_timer_running の値に応じて isRunning を設定
@@ -47,16 +50,19 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
 
     const handleStartStop = () => {
         setIsRunning(!isRunning);
+        if(isPlaying){
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        setIsPlaying(false);
         onStop();
     };
 
     const playAlertSound = () => {
-        const audio = new Audio('/sounds/menuettm.mp3'); // ここで音声ファイルのパスを指定
         audio.play();
+        setIsPlaying(true);
       };
       
-    
-
 
     // 時間、分、秒を表示する
     const hours = Math.floor(Math.abs(break_time) / 3600);
