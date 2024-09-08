@@ -1,0 +1,39 @@
+/* styles/TimerController.module.css */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .select {
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #0070f3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  .button:hover {
+    background-color: #005bb5;
+  }
+  
+  .timerSection {
+    margin-bottom: 20px;
+  }
+  

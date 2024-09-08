@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+
+select {
+  font-size: initial;
+  color: black; /*または別の目立つ色 */
+  border: 1px solid black; /* 明確なボーダーを設定 */
+}
