@@ -11,8 +11,8 @@ interface BreakTimerProps {
 }
 
 const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_running,onStop}) =>{
-    const [initialBreakTime,setInitialBreakTime] = useState<number>(0);
-    const [break_time,setTime] = useState(initialBreakTime);
+    const [initial_break_time,setInitialBreakTime] = useState(0);
+    const [break_time,setTime] = useState(0);
     const [isRunning,setIsRunning] = useState(false);
     const [isPlaying,setIsPlaying] = useState(false);
     const audio = AudioManager.getInstance();
@@ -25,9 +25,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     }, [break_timer_running]);
 
     useEffect(() => {
-        // studyTime と ratio が変わったときに initialBreakTime を再計算
-        const calculatedBreakTime = Math.floor(studyTime / ratio);
-        setInitialBreakTime(calculatedBreakTime);
+        const calculatedBreakTime = initial_break_time+Math.floor(studyTime / ratio);
         setTime(calculatedBreakTime); // タイマーの初期値を設定
       }, [studyTime, ratio]); // studyTime または ratio が変更されたときに再計算
 
@@ -56,6 +54,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
         }
         setIsPlaying(false);
         onStop();
+        setInitialBreakTime(break_time);
     };
 
     const playAlertSound = () => {

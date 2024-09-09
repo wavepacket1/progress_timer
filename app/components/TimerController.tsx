@@ -23,11 +23,6 @@ const TimerController: React.FC = () => {
         setRatio(newRatio);
     };
 
-
-    const handleStudyReset = () => {
-        setStudyTime(0);
-    }
-
     return (
         <div className={styles.container}>
             <div className={styles.timerSection}>
