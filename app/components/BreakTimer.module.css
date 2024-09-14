@@ -1,0 +1,42 @@
+.break_timer{
+    font-size: 3em;
+}
+
+.break_time{
+    font-size: 4em;
+}
+
+.break_time_button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5ps;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.break_time_button:hover {
+    background-color: #45a049;
+}
+
+.break_time_button:active {
+    background-color: #3e8e41;
+}
+
+.stop_button {
+    background-color: #f44336;
+}
+
+.stop_button:hover {
+    background-color: #e53935;
+}
+
+.stop_button:active {
+    background-color: #d32f2f;
+}
+
+.active_background {
+    background-color: #ffeb3b;
+}

@@ -1,6 +1,7 @@
 import { on } from 'events';
 import React,{ useState,useEffect } from 'react';
 import AudioManager from './AudioSingleton';
+import styles from './BreakTimer.module.css';
 
 
 interface BreakTimerProps {
@@ -15,6 +16,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const [break_time,setTime] = useState(0);
     const [isRunning,setIsRunning] = useState(false);
     const [isPlaying,setIsPlaying] = useState(false);
+    const [ActiveBackgroundFlag,setActiveBackgroundFlag] = useState(false);
     const audio = AudioManager.getInstance();
 
     useEffect(() => {
@@ -43,6 +45,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     useEffect(() => {
         if (break_time ===0 && isRunning){
             playAlertSound(); // 音を鳴らす
+            document.body.style.backgroundColor = '#87CEEB';
         }
     },[break_time]);
 
@@ -52,6 +55,7 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
             audio.pause();
             audio.currentTime = 0;
         }
+        document.body.style.backgroundColor = '';
         setIsPlaying(false);
         onStop();
         setInitialBreakTime(break_time);
@@ -72,11 +76,13 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const formattedTime = `${break_time < 0 ? '-' : ''}${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
     return (
         <div>
-            <h1>Break Timer</h1>
-            <p>
+            <h1 className={styles.break_timer}>Break Timer</h1>
+            <p className={styles.break_time}>
                 Break Time: {formattedTime}
             </p>
-            <button onClick={handleStartStop}>
+            <button className={`${styles.break_time_button} ${isRunning ? styles.stop_button : '' }` }
+                    onClick={handleStartStop}
+            >
                 {isRunning ? 'Stop' : 'Start'}
             </button>
         </div>

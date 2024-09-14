@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import styles from './StudyTimer.module.css'; 
 interface StudyTimerProps {
   onTimeUpdate: (time: number) => void; // 時間が更新されたときに呼び出されるコールバック
   onStop: () => void; // 新しく追加するコールバック
@@ -42,8 +42,11 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onTimeUpdate,onStop }) => {
 
   return (
     <div>
-      <h2>Study Time: {formatTime(time)}</h2>
-      <button onClick={handleStartStop}>
+      <h1 className={styles.study_timer}>Study Timer</h1>
+      <h2 className={styles.study_time}>Study Time: {formatTime(time)}</h2>
+      <button className={`${styles.study_time_button} ${isRunning ? styles.stop_button : ''}`} 
+              onClick={handleStartStop}
+              >
         {isRunning ? 'Stop' : 'Start'}
       </button>
     </div>
