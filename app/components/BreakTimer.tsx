@@ -16,7 +16,6 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const [break_time,setTime] = useState(0);
     const [isRunning,setIsRunning] = useState(false);
     const [isPlaying,setIsPlaying] = useState(false);
-    const [ActiveBackgroundFlag,setActiveBackgroundFlag] = useState(false);
     const audio = AudioManager.getInstance();
 
     useEffect(() => {
