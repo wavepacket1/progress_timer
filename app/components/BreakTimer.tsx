@@ -16,7 +16,14 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const [break_time,setTime] = useState(0);
     const [isRunning,setIsRunning] = useState(false);
     const [isPlaying,setIsPlaying] = useState(false);
+    const [showModal,setShowModal] = useState(false);
     const audio = AudioManager.getInstance();
+
+    const handleReset = () =>{
+        setTime(0);
+        setInitialBreakTime(0);
+        setShowModal(false);
+    }
 
     useEffect(() => {
         // 初期化時に break_timer_running の値に応じて isRunning を設定
@@ -79,11 +86,26 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
             <p className={styles.break_time}>
                 Break Time: {formattedTime}
             </p>
-            <button className={`${styles.break_time_button} ${isRunning ? styles.stop_button : '' }` }
-                    onClick={handleStartStop}
-            >
-                {isRunning ? 'Stop' : 'Start'}
-            </button>
+            <div className={styles.buttons_container}>
+                <button className={`${styles.break_time_button} ${isRunning ? styles.stop_button : '' }` }
+                        onClick={handleStartStop}
+                >
+                    {isRunning ? 'Stop' : 'Start'}
+                </button>
+                <button className={styles.reset_button} onClick={() => setShowModal(true)}>
+                    Reset
+                </button>
+            </div>
+
+            {showModal && (
+                <div className={styles.modal}>
+                    <div className={styles.modal_content}>
+                        <p>リセットしますか？</p>
+                        <button className={styles.modal_button} onClick={handleReset}>はい</button>
+                        <button className={styles.modal_button} onClick={()=> setShowModal(false)}>いいえ</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

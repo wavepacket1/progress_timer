@@ -29,7 +29,7 @@ const TimerController: React.FC = () => {
                 <StudyTimer onTimeUpdate={handleStudyTimeUpdate} onStop={handleStop}/>
             </div>
             <div className={styles.timerSection}>
-                <label  className={styles.label}>Ratio(Break time/Study time): </label>
+                <label  className={`${styles.label} ${styles.compact_label}`}>Ratio(Break time/Study time): </label>
                 <select className={styles.select}  value={ratio} onChange={ handleChange }>
                     <option value={1}>1/1</option>
                     <option value={2}>1/2</option>

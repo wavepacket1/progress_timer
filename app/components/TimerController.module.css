@@ -37,4 +37,32 @@
   .timerSection {
     margin-bottom: 20px;
   }
+
+  /* モバイルデバイス向けのスタイル */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .timerSection {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .select {
+    width: auto; 
+    padding: 10px;
+    font-size: 1.3em;
+  }
+
+  .compact_label {
+    font-size: 1.3em;
+  }
+}
   
