@@ -4,7 +4,7 @@ import './globals.css';
 export default function Home() {
   return (
     <div>
-      <h1>Progress Timer</h1>
+      <h1 className="large-heading">Progress Timer</h1>
       <TimerController />
     </div>
   );
