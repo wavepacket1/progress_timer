@@ -1,5 +1,6 @@
 /* styles/TimerController.module.css */
 .container {
+    font-size: 120%;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
