@@ -17,18 +17,24 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     const [isRunning,setIsRunning] = useState(false);
     const [isPlaying,setIsPlaying] = useState(false);
     const [showModal,setShowModal] = useState(false);
+    const [startTime, setStartTime] = useState<number | null>(null); // 開始時刻
+    const [pausedTime, setPausedTime] = useState(0); // 一時停止時の残り時間
     const audio = AudioManager.getInstance();
 
     const handleReset = () =>{
         setTime(0);
         setInitialBreakTime(0);
         setShowModal(false);
+        setStartTime(null);
+        setPausedTime(0);
     }
 
     useEffect(() => {
         // 初期化時に break_timer_running の値に応じて isRunning を設定
         if (break_timer_running){
             setIsRunning(true);
+            setStartTime(Date.now());
+            setPausedTime(break_time);
         }
     }, [break_timer_running]);
 
@@ -40,13 +46,16 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     
     useEffect(() => {
         let timer: NodeJS.Timeout | undefined;
-        if( isRunning ) {
+        if( isRunning && startTime !== null ) {
             timer = setInterval(() => {
-                setTime((prevTime) => prevTime - 1);
-            },1000);
+                const now = Date.now();
+                const elapsedSeconds = Math.floor((now - startTime) / 1000);
+                const remainingTime = pausedTime - elapsedSeconds;
+                setTime(remainingTime);
+            },100); // 100msごとに更新して精度を上げる
         }
         return ()=> clearInterval(timer);
-    },[isRunning,break_timer_running]);
+    },[isRunning,startTime,pausedTime]);
 
     useEffect(() => {
         if (break_time ===0 && isRunning){
@@ -56,6 +65,15 @@ const BreakTimer: React.FC<BreakTimerProps> = ({ studyTime,ratio,break_timer_run
     },[break_time]);
 
     const handleStartStop = () => {
+        if (!isRunning) {
+            // 開始時
+            setStartTime(Date.now());
+            setPausedTime(break_time);
+        } else {
+            // 停止時
+            setPausedTime(break_time); // 現在の残り時間を保持
+            setStartTime(null);
+        }
         setIsRunning(!isRunning);
         if(isPlaying){
             audio.pause();

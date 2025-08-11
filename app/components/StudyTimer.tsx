@@ -8,19 +8,20 @@ interface StudyTimerProps {
 const StudyTimer: React.FC<StudyTimerProps> = ({ onTimeUpdate,onStop }) => {
   const [time, setTime] = useState(0); // 時間（秒単位）
   const [isRunning, setIsRunning] = useState(false); // タイマーの実行状態
+  const [startTime, setStartTime] = useState<number | null>(null); // 開始時刻
+  const [pausedTime, setPausedTime] = useState(0); // 一時停止時の累積時間
 
 
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined;
 
-    if (isRunning) {
+    if (isRunning && startTime !== null) {
       timer = setInterval(() => {
-        setTime(prevTime => {
-          const newTime = prevTime + 1;
-          onTimeUpdate(newTime); // 時間が更新されたときにコールバックを呼び出す
-          return newTime;
-        });
-      }, 1000);
+        const now = Date.now();
+        const elapsedSeconds = Math.floor((now - startTime) / 1000) + pausedTime;
+        setTime(elapsedSeconds);
+        onTimeUpdate(elapsedSeconds);
+      }, 100); // 100msごとに更新して精度を上げる
     } else {
         clearInterval(timer);
     }
@@ -30,12 +31,19 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onTimeUpdate,onStop }) => {
         clearInterval(timer);
       }
     };
-  }, [isRunning, onTimeUpdate]);
+  }, [isRunning, startTime, pausedTime, onTimeUpdate]);
 
   const handleStartStop = () => {
     if(isRunning) {
+        // 停止時
+        setPausedTime(0);
+        setStartTime(null);
         onStop();
         setTime(0);
+    } else {
+        // 開始時
+        setStartTime(Date.now());
+        setPausedTime(time); // 現在の時間を保持（再開時用）
     }
     setIsRunning(prevState => !prevState);
   };
