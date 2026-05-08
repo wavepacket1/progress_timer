@@ -161,7 +161,7 @@
   .timerSection:nth-child(3) {
     padding: 1.5rem 1.5rem 2rem;
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
   }
 
   .timerSection:nth-child(2) {
