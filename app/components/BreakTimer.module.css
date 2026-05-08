@@ -1,130 +1,178 @@
-.break_timer{
-    font-size: 3em;
+.break_timer {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 0.8rem;
+  letter-spacing: 0.45em;
+  color: var(--break);
+  margin: 0 0 1.5rem;
+  opacity: 0.85;
+  font-weight: 400;
 }
 
-.break_time{
-    font-size: 4em;
+.time_label {
+  font-family: var(--font-body, 'DM Sans'), sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
 }
 
-.break_time_button{
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5ps;
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
+.break_time {
+  font-family: var(--font-mono, 'Share Tech Mono'), monospace;
+  font-size: clamp(2rem, 5.5vw, 5.5rem);
+  color: var(--muted);
+  margin: 0 0 2.2rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.break_time.active {
+  color: var(--break);
+  text-shadow: 0 0 45px rgba(255, 96, 48, 0.3);
+}
+
+.break_time.alert {
+  color: var(--danger);
+  text-shadow: 0 0 50px rgba(255, 59, 92, 0.5);
+  animation: pulse-alert 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-alert {
+  from { text-shadow: 0 0 25px rgba(255, 59, 92, 0.3); }
+  to   { text-shadow: 0 0 65px rgba(255, 59, 92, 0.75); }
+}
+
+.alert_label {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 0.65rem;
+  letter-spacing: 0.6em;
+  color: var(--danger);
+  margin: -1.6rem 0 1.8rem;
+  animation: pulse-alert 1s ease-in-out infinite alternate;
+}
+
+.buttons_container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.break_time_button {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 1rem;
+  letter-spacing: 0.28em;
+  padding: 0.6rem 2rem;
+  background: transparent;
+  color: var(--break);
+  border: 1px solid var(--break);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-transform: uppercase;
 }
 
 .break_time_button:hover {
-    background-color: #45a049;
+  background: var(--break-dim);
 }
 
 .break_time_button:active {
-    background-color: #3e8e41;
+  background: rgba(255, 96, 48, 0.18);
 }
 
 .stop_button {
-    background-color: #f44336;
+  color: var(--danger);
+  border-color: var(--danger);
 }
 
 .stop_button:hover {
-    background-color: #e53935;
+  background: rgba(255, 59, 92, 0.08);
 }
 
-.stop_button:active {
-    background-color: #d32f2f;
+.reset_button {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 1rem;
+  letter-spacing: 0.28em;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  text-transform: uppercase;
 }
 
-.active_background {
-    background-color: #ffeb3b;
-}
-
-.reset_button{
-    background-color: blue;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5ps;
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.reset_button:hover {
+  border-color: var(--muted);
+  color: var(--text);
 }
 
 .modal {
-    position:fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(6px);
 }
 
-.modal_content{
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
+.modal_content {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--break);
+  color: var(--text);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  min-width: 240px;
+  font-family: var(--font-body, 'DM Sans'), sans-serif;
+  font-size: 0.95rem;
 }
 
-.modal_button{
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+.modal_button {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  padding: 0.5rem 1.5rem;
+  margin: 1.2rem 0.4rem 0;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  transition: background 0.15s ease, border-color 0.15s ease;
+  text-transform: uppercase;
 }
 
-.modal_button:hover {
-    background-color: #0056b3;
+.modal_button:first-of-type {
+  border-color: var(--danger);
+  color: var(--danger);
 }
 
-@media (max-width: 600px) {
-    .modal_content {
-      width: 90%; /* モーダルの幅を90%に設定 */
-      padding: 10px; /* パディングを調整 */
-    }
-  
-    .modal_button {
-        flex-direction: column;
-        align-items: center;
-        align-items: stretch;
-    }
-  
-    .modal_buttons {
-      width: 100%; 
-      margin: 10px 0;
-    }
-    
-    .break_timer {
-        font-size: 1.5em; /* フォントサイズを調整 */
-        text-align: center; /* テキストを中央揃え */
-    }
-    
-    .break_time {
-        font-size: 1.2em; /* フォントサイズを調整 */
-        text-align: center; /* テキストを中央揃え */
-        margin-bottom: 20px; /* 下にスペースを追加 */
-    }
+.modal_button:first-of-type:hover {
+  background: rgba(255, 59, 92, 0.08);
+}
 
-    .buttons_container {
-        display: flex;
-        flex-direction: column; /* ボタンを縦に並べる */
-        align-items: center; /* ボタンを中央に配置 */
-    }
+.modal_button:last-of-type:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--muted);
+}
 
-    .break_time_button,.reset_button {
-        width: 80%;
-        margin: 10px 0;
-    }
+@media (max-width: 780px) {
+  .break_timer { font-size: 0.7rem; }
+  .break_time {
+    font-size: clamp(2.2rem, 12vw, 3.5rem);
+    margin-bottom: 1.5rem;
   }
+  .buttons_container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .break_time_button,
+  .reset_button {
+    width: 100%;
+    text-align: center;
+  }
+}

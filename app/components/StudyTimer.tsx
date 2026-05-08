@@ -51,7 +51,8 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onTimeUpdate,onStop }) => {
   return (
     <div>
       <h1 className={styles.study_timer}>Study Timer</h1>
-      <h2 className={styles.study_time}>Study Time: {formatTime(time)}</h2>
+      <p className={styles.time_label}>Study Time</p>
+      <p className={`${styles.study_time} ${isRunning ? styles.active : ''}`}>{formatTime(time)}</p>
       <button className={`${styles.study_time_button} ${isRunning ? styles.stop_button : ''}`} 
               onClick={handleStartStop}
               >
