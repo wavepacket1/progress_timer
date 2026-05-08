@@ -3,48 +3,63 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --bg:         #050811;
+  --panel:      #0b0f1a;
+  --border:     #172035;
+  --study:      #00ffa3;
+  --study-dim:  rgba(0, 255, 163, 0.08);
+  --break:      #ff6030;
+  --break-dim:  rgba(255, 96, 48, 0.08);
+  --text:       #c8d4e8;
+  --muted:      #374660;
+  --danger:     #ff3b5c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-html,body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  width: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body, 'DM Sans'), sans-serif;
+  transition: background-color 0.8s ease;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-select {
-  font-size: initial;
-  color:black; /*または別の目立つ色 */
-  border: 1px solid black; /* 明確なボーダーを設定 */
+/* Ambient glow background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 18% 50%, rgba(0, 255, 163, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 70% at 82% 50%, rgba(255, 96, 48, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .large-heading {
-  font-size: 1.5em;
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 0.8rem;
+  letter-spacing: 0.7em;
+  color: var(--muted);
+  text-align: center;
+  padding: 2.5rem 2rem 0;
+  text-transform: uppercase;
+}
+
+select {
+  appearance: none;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-family: var(--font-body, 'DM Sans'), sans-serif;
 }

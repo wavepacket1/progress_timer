@@ -1,68 +1,168 @@
-/* styles/TimerController.module.css */
 .container {
-    font-size: 120%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .label {
-    font-size: 1.5em;
-    margin-right: 10px;
-  }
-  
-  .select {
-    font-size: 1.5em;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #0070f3;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 10px 0;
-  }
-  
-  .button:hover {
-    background-color: #005bb5;
-  }
-  
-  .timerSection {
-    margin-bottom: 20px;
-  }
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "ratio ratio"
+    "study break";
+  gap: 0;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  padding: 0;
+  align-items: stretch;
+}
 
-  /* モバイルデバイス向けのスタイル */
-@media (max-width: 600px) {
+/* Ratio bar — full width across the top */
+.timerSection:nth-child(2) {
+  grid-area: ratio;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--muted);
+  padding: 0.6rem 1.5rem;
+}
+
+/* Study panel */
+.timerSection:nth-child(1) {
+  grid-area: study;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--study);
+  padding: 2.5rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Break panel */
+.timerSection:nth-child(3) {
+  grid-area: break;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--break);
+  padding: 2.5rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.4s ease, border-top-color 0.4s ease;
+}
+
+/* Break alert — panel-level glow */
+.alert_active {
+  border-top-color: var(--danger) !important;
+  animation: panel-alert 1s ease-in-out infinite alternate;
+}
+
+@keyframes panel-alert {
+  from { box-shadow: inset 0 0 30px rgba(255, 59, 92, 0.04); }
+  to   { box-shadow: inset 0 0 100px rgba(255, 59, 92, 0.18); }
+}
+
+.brand {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.55em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.bar_sep {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin: 0 1.5rem;
+}
+
+.label {
+  font-family: var(--font-body, 'DM Sans'), sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.compact_label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.select {
+  padding: 0.38rem 1rem;
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 1.05rem;
+  letter-spacing: 0.2em;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--muted);
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.select:hover {
+  border-color: var(--text);
+  color: #fff;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--text);
+}
+
+.mute_btn {
+  font-family: var(--font-bebas, 'Bebas Neue'), cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  padding: 0.38rem 0.9rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mute_btn:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.muted {
+  color: var(--danger) !important;
+  border-color: var(--danger) !important;
+}
+
+@media (max-width: 780px) {
   .container {
-    padding: 10px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "ratio"
+      "study"
+      "break";
+    gap: 0.5rem 0;
+    padding: 0.5rem;
+    height: auto;
+    min-height: 100vh;
+    align-items: start;
   }
 
-  .timerSection {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 15px;
+  .timerSection:nth-child(1),
+  .timerSection:nth-child(3) {
+    padding: 1.5rem 1.5rem 2rem;
   }
 
-  .label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .select {
-    width: auto; 
-    padding: 10px;
-    font-size: 1.3em;
-  }
-
-  .compact_label {
-    font-size: 1.3em;
+  .timerSection:nth-child(2) {
+    border-left: 2px solid var(--muted);
+    padding: 0.6rem 1rem;
   }
 }
-  
