@@ -14,9 +14,12 @@
     "testEnvironment": "jsdom"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "15.5.18",
     "react": "^18",
     "react-dom": "^18"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.1",
@@ -24,7 +27,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
+    "postcss": "^8.5.10",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.2.5",
     "typescript": "^5"
