@@ -149,20 +149,33 @@
       "ratio"
       "study"
       "break";
+    grid-template-rows: auto auto auto;
     gap: 0.5rem 0;
     padding: 0.5rem;
     height: auto;
     min-height: 100vh;
     align-items: start;
+    align-content: start;
   }
 
   .timerSection:nth-child(1),
   .timerSection:nth-child(3) {
     padding: 1.5rem 1.5rem 2rem;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
   .timerSection:nth-child(2) {
     border-left: 2px solid var(--muted);
     padding: 0.6rem 1rem;
+    gap: 0.6rem;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .bar_sep {
+    display: none;
   }
 }
